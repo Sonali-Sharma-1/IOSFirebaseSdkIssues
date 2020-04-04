@@ -2,10 +2,11 @@ package com.example.firebasesdkproject
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import com.example.firebasesdkproject.fragments.IssueDetailFragment
+import com.example.firebasesdkproject.fragments.IssueDetailFragment.Companion.bundleData
 import com.example.firebasesdkproject.fragments.IssueListFragment
+import com.example.firebasesdkproject.model.IssueModelItem
 import io.realm.Realm
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,10 +19,18 @@ class MainActivity : AppCompatActivity() {
 //        realm = Realm.getDefaultInstance()
 
         if (savedInstanceState == null) {
-            val fragment =  IssueListFragment()
+            val fragment = IssueListFragment()
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, fragment, "issuelist").commit()
         }
 
+    }
+
+    fun detailView(issue: IssueModelItem?) {
+        val issueDetailFragment = bundleData(issue?.id)
+        supportFragmentManager
+            .beginTransaction()
+            .addToBackStack("issueDetail")
+            .replace(R.id.fragment_container, issueDetailFragment, null).commit()
     }
 }

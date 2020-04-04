@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.firebasesdkproject.model.IssueListRepository
 import com.example.firebasesdkproject.model.IssueModel
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class IssueListingViewModel(application: Application) : AndroidViewModel(application) {
     private var issueListRepository: IssueListRepository? = null
 
     val getAllList: LiveData<IssueModel>

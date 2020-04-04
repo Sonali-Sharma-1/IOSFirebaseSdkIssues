@@ -10,16 +10,12 @@ import com.example.firebasesdkproject.databinding.IssueListItemBinding
 import com.example.firebasesdkproject.model.IssueModel
 import com.example.firebasesdkproject.model.IssueModelItem
 
- class IssueListAdapter : RecyclerView.Adapter<IssueListAdapter.IssueViewHolder> {
+ class IssueListAdapter(private val clickListener: ItemClickListener) : RecyclerView.Adapter<IssueListAdapter.IssueViewHolder>() {
     private var issuesList: List<IssueModelItem?>? = null
-    private var clickListener: ItemClickListener ? = null
-
-
-    constructor() {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueListAdapter.IssueViewHolder {
         val binding: IssueListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.issue_list_item, parent, false)
-//        binding.setItemClickListener(clickListener)
+        binding.setItemClickListener(clickListener)
         return IssueViewHolder(binding)
 
     }

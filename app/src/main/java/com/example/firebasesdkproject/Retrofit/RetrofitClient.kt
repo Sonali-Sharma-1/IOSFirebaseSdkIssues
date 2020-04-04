@@ -7,7 +7,7 @@ object RetrofitClient {
     private var retrofit: Retrofit? = null
     private val BASE_URL = "https://api.github.com/repos/firebase/firebase-ios-sdk/"
 
-    val service: IssueListDataService
+    val service: ApiService
     get() {
         if (retrofit == null) {
            retrofit = Retrofit.Builder()
@@ -15,6 +15,6 @@ object RetrofitClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
-        return retrofit!!.create(IssueListDataService::class.java)
+        return retrofit!!.create(ApiService::class.java)
     }
 }
