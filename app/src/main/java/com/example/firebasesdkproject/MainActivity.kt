@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun detailView(issue: IssueModelItem?) {
-        val issueDetailFragment = bundleData(issue?.id)
+        val issueDetailFragment = bundleData(issue?.id, issue?.comments_url)
         supportFragmentManager
             .beginTransaction()
             .addToBackStack("issueDetail")

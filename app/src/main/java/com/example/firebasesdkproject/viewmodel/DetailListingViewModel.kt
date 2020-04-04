@@ -8,20 +8,20 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.firebasesdkproject.model.CommentListRepository
 import com.example.firebasesdkproject.model.CommentModel
 
-class DetailListingViewModel(id: Int?)  : ViewModel(){
+class DetailListingViewModel(commentURL: String?)  : ViewModel(){
     private var commentListRepository: CommentListRepository? = null
 
     val getCommentList: LiveData<CommentModel>
         get() = commentListRepository!!.getCommentLiveData()
 
     init {
-        commentListRepository = CommentListRepository()
+        commentListRepository = CommentListRepository(commentURL)
     }
 
 
-    class Factory(private val id: Int) : ViewModelProvider.NewInstanceFactory() {
+    class Factory(private val commentURL: String) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return DetailListingViewModel(id) as T
+            return DetailListingViewModel(commentURL) as T
         }
 
     }

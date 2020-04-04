@@ -3,9 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="android.view.View"/>
-        <variable name="commentModel" type="com.example.firebasesdkproject.model.CommentModelItem"/>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="commentModel"
+            type="com.example.firebasesdkproject.model.CommentModelItem" />
     </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp"
+        app:contentPadding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,27 +26,57 @@
         android:background="@color/cardview_light_background"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/author"
+        <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            android:text="@{commentModel.user.login}"
-            />
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:id="@+id/author_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AUTHOR : "
+                android:textColor="#000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textAllCaps="true"
+                android:text="@{commentModel.user.login}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="COMMENTS"
+                android:textSize="15sp"
+                android:textColor="#000">
+            </TextView>
 
         <TextView
             android:id="@+id/comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:layoutManager="LinearLayoutManager"
             android:text="@{commentModel.body}"
-            />
-
+            app:layoutManager="LinearLayoutManager" />
+        </LinearLayout>
     </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </layout>

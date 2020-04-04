@@ -9,11 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.firebasesdkproject.Constants.TextConstants
 import com.example.firebasesdkproject.R
 import com.example.firebasesdkproject.adapter.IssueDetailAdapter
 import com.example.firebasesdkproject.model.CommentModelItem
-import com.example.firebasesdkproject.model.IssueModelItem
 import com.example.firebasesdkproject.viewmodel.DetailListingViewModel
 
 class IssueDetailFragment : Fragment {
@@ -39,7 +37,7 @@ class IssueDetailFragment : Fragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val factory = arguments?.getInt(ISSUE_ID_KEY)?.let { DetailListingViewModel.Factory(it) }
+        val factory = arguments?.getString(COMMENTS_URL)?.let { DetailListingViewModel.Factory(it) }
         detailListViewModel =
             ViewModelProviders.of(this, factory).get(DetailListingViewModel::class.java)
         detailListViewModel!!.getCommentList.observe(this, Observer { list ->
@@ -49,12 +47,14 @@ class IssueDetailFragment : Fragment {
 
     companion object {
         private val ISSUE_ID_KEY = "issue_id"
+        private val COMMENTS_URL = "COMMENTS_URL"
         @JvmStatic
-        fun bundleData(id: Int?): IssueDetailFragment {
+        fun bundleData(id: Int?, commentURL : String?): IssueDetailFragment {
             val fragment = IssueDetailFragment()
             val args = Bundle()
             if (id != null) {
                 args.putInt(ISSUE_ID_KEY, id)
+                args.putString(COMMENTS_URL, commentURL)
             }
             fragment.arguments = args
             return fragment
