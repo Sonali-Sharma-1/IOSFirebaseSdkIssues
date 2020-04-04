@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:text="@{issue.title}"
             android:fontFamily="bold"
-            tools:text="Title" />
+            android:textColor="#000"
+            android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/description"
@@ -39,7 +40,7 @@
                 android:layout_marginTop="8dp"
                 android:textSize="14sp"
                 android:text="@{issue.body}"
-                tools:text="Delicious cookies made with chocolate  nkwjadsbnjkbasjdbkjbasjdbkjabsdjksabdjkbajkdbjkbdjkjkabsdbabdjabdjkbjkbajkds"
+                android:maxLength="120"
                 android:layout_below="@id/issueTitle"
                 />
 
