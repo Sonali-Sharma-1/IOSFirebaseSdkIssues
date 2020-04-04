@@ -1,7 +1,20 @@
 package com.example.firebasesdkproject.model
 
+import androidx.room.*
+import com.example.firebasesdkproject.typeConverter.UserTypeConvertor
+
 class CommentModel : ArrayList<CommentModelItem>()
 
-data class CommentModelItem(val body: String, val id: Int, val user: User)
+@Entity
+data class CommentModelItem(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    @ColumnInfo(name = "Comments")
+    val body: String,
+    @Embedded
+    val user: User)
 
-data class User(val login: String)
+data class User(
+    @ColumnInfo(name = "Author")
+    val login: String
+)
