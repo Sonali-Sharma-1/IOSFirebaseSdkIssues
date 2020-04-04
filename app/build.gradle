@@ -18,6 +18,7 @@ android {
         applicationId "com.example.firebasesdkproject"
         minSdkVersion 15
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -53,5 +54,8 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:1.1.1"
     kapt "android.arch.persistence.room:compiler:1.1.1"
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
+    implementation 'com.android.support:multidex:1.0.3'
+    compile 'com.facebook.stetho:stetho:1.5.1'
+
 
 }
