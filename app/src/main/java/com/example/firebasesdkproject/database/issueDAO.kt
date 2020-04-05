@@ -1,9 +1,6 @@
 package com.example.firebasesdkproject.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import androidx.room.*
 import com.example.firebasesdkproject.model.CommentModel
 import com.example.firebasesdkproject.model.IssueModel
 
@@ -17,6 +14,13 @@ public interface issueDAO {
     fun insertComments(list: CommentModel?)
 
     @Delete
-    fun deleteIssueList(list: IssueModel) : Int
+    fun deleteIssueList(list: IssueModel)
+
+//    @Query("SELECT * FROM IssueModelItem WHERE number=:userId")
+//    fun findCommentsFromTable(userId: Int): List<CommentModel?>?
+//
+//    @Query("SELECT * FROM IssueModelItem")
+//    fun getAllIssuesListing(): List<IssueModel?>?
+
 
 }

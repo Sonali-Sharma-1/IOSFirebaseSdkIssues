@@ -9,11 +9,12 @@ class IssueModel : ArrayList<IssueModelItem>()
 @Entity
 data class IssueModelItem(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    @ColumnInfo(name = "Description")
-    val body: String,
+    @ColumnInfo(name = "CommentId")
+    val number : Int,
     @ColumnInfo(name = "Title")
     val title: String,
+    @ColumnInfo(name = "Description")
+    val body: String,
     @ColumnInfo(name = "Comments URL")
     val comments_url : String
 )

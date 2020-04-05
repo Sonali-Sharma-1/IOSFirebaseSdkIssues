@@ -3,6 +3,7 @@ package com.example.firebasesdkproject.model
 import android.content.ContentValues
 import android.os.AsyncTask
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.firebasesdkproject.Retrofit.RetrofitClient
 import com.example.firebasesdkproject.database.RoomDb
@@ -27,21 +28,26 @@ class CommentListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
         call?.enqueue(object : Callback<CommentModel?> {
 
             override fun onResponse(call: Call<CommentModel?>, response: Response<CommentModel?>) {
-                commentList = response.body()!!
-                mutableLiveData.value = response.body()
-                AsyncTask.execute {
-                    saveInDB(response.body())
-                }
+                    commentList = response.body()!!
+                    mutableLiveData.value = response.body()
+                    AsyncTask.execute {
+                        saveInDB(response.body())
+                    }
             }
 
-            override fun onFailure(call: Call<CommentModel?>, t: Throwable) {}
+            override fun onFailure(call: Call<CommentModel?>, t: Throwable) {
+            }
         })
 
         return mutableLiveData
     }
 
     private fun saveInDB(results: CommentModel?) {
-        Log.d(ContentValues.TAG, "${results} inserted to databade")
-        roomDb.issueDao().insertComments(results)
+        Log.d(ContentValues.TAG, "${results} Comments inserted to database")
+        try {
+            roomDb.issueDao().insertComments(results)
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
     }
 }

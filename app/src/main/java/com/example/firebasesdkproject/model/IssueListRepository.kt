@@ -37,7 +37,11 @@ class IssueListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
     }
 
     private fun saveInDB(results: IssueModel?) {
-        Log.d(TAG, "${results} inserted to databade")
-        roomDb.issueDao().insertIssueList(results)
+        Log.d(TAG, "${results} inserted to database")
+        try {
+            roomDb.issueDao().insertIssueList(results)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

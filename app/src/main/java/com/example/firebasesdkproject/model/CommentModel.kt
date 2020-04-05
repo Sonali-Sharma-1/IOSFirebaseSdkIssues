@@ -1,17 +1,25 @@
 package com.example.firebasesdkproject.model
 
 import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
+import kotlin.collections.ArrayList
+
 
 class CommentModel : ArrayList<CommentModelItem>()
 
-@Entity
+
+@Entity(tableName = "CommentModelItem", foreignKeys = [ForeignKey(
+    entity = IssueModelItem::class, parentColumns = arrayOf("CommentId"),
+    childColumns = arrayOf("comment_id"), onDelete = CASCADE)])
+
 data class CommentModelItem(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    @ColumnInfo(name="comment_id")
     val id: Int,
-    @ColumnInfo(name = "Comments")
-    val body: String,
     @Embedded
-    val user: User)
+    val user: User,
+    @ColumnInfo(name = "Comments")
+    val body: String)
 
 data class User(
     @ColumnInfo(name = "Author")
