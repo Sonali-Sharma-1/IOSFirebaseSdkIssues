@@ -9,13 +9,15 @@ class CommentModel : ArrayList<CommentModelItem>()
 
 
 @Entity(tableName = "CommentModelItem", foreignKeys = [ForeignKey(
-    entity = IssueModelItem::class, parentColumns = arrayOf("CommentId"),
-    childColumns = arrayOf("comment_id"), onDelete = CASCADE)])
+    entity = IssueModelItem::class, parentColumns = arrayOf("id"),
+    childColumns = arrayOf("issue_id"), onDelete = CASCADE)])
 
 data class CommentModelItem(
     @PrimaryKey
     @ColumnInfo(name="comment_id")
     val id: Int,
+    @ColumnInfo(name = "issue_id")
+    val issueId : Int,
     @Embedded
     val user: User,
     @ColumnInfo(name = "Comments")

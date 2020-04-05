@@ -8,8 +8,8 @@ class IssueModel : ArrayList<IssueModelItem>()
 
 @Entity
 data class IssueModelItem(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "CommentId")
+    @PrimaryKey
+    @ColumnInfo(name = "id")
     val number : Int,
     @ColumnInfo(name = "Title")
     val title: String,
