@@ -1,7 +1,6 @@
 package com.example.firebasesdkproject.model
 
 import androidx.room.*
-import com.example.firebasesdkproject.typeConverter.UserTypeConvertor
 
 class CommentModel : ArrayList<CommentModelItem>()
 

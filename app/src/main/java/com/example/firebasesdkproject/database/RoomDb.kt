@@ -14,7 +14,7 @@ abstract class RoomDb : RoomDatabase() {
 
     companion object {
         const val DB_NAME = "issues.db"
-        const val VERSION = 2
+        const val VERSION = 3
         private val instance: RoomDb by lazy { create(App.instance) }
 
         @Synchronized
@@ -24,7 +24,6 @@ abstract class RoomDb : RoomDatabase() {
 
         private fun create(context: Context): RoomDb {
             return Room.databaseBuilder(context, RoomDb::class.java, DB_NAME)
-                .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build()
         }

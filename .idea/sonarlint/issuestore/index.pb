@@ -1,8 +1,6 @@
 
 Y
 )app/src/main/res/layout/activity_main.xml,7/6/76b07e40f24cce093536731477540f12e7da3cb6
-|
-Lapp/src/main/java/com/example/firebasesdkproject/RealmDb/RealmApplication.kt,0/2/0291d26014369e4f8efbf9505606bf6826db0646
 p
 @app/src/main/java/com/example/firebasesdkproject/MainActivity.kt,b/9/b94862401b8771b142f0f6ec849bf8d03b50910c
 <
@@ -17,13 +15,31 @@ Oapp/src/main/java/com/example/firebasesdkproject/fragments/IssueListFragment.kt
 Lapp/src/main/java/com/example/firebasesdkproject/adapter/IssueListAdapter.kt,b/e/bea3f5010cf2a00232827ed7418ac5dd7b791df9
 {
 Kapp/src/main/java/com/example/firebasesdkproject/Retrofit/RetrofitClient.kt,5/0/50743b397ecfa5126566e1fe292eac11ef6dff65
-
-Qapp/src/main/java/com/example/firebasesdkproject/Retrofit/IssueListDataService.kt,5/0/5027b5ad63ab1367e9a756966d1bb49a32ad61fb
-{
-Kapp/src/main/java/com/example/firebasesdkproject/viewmodel/MainViewModel.kt,0/0/002ddb08e8cdebceeca52b4d6bdc4a56cc34dbd0
 t
 Dapp/src/main/java/com/example/firebasesdkproject/model/IssueModel.kt,2/1/216f26fb7557814b0d0099215adf835386ae2bf4
 }
 Mapp/src/main/java/com/example/firebasesdkproject/model/IssueListRepository.kt,d/0/d070690f71434fcc8936d7184c72dd0c7807b47c
+~
+Napp/src/main/java/com/example/firebasesdkproject/adapter/IssueDetailAdapter.kt,6/f/6fd9fca8358fc3c10a29d9e057968949b66be328
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+„
+Tapp/src/main/java/com/example/firebasesdkproject/viewmodel/DetailListingViewModel.kt,2/e/2e2976518c69b85f7bd14c90636085eb236e69e3
+ƒ
+Sapp/src/main/java/com/example/firebasesdkproject/typeConverter/UserTypeConvertor.kt,0/3/03d36ed9884f3c98a66fc5509e931e3b0ad318b9
+
+Qapp/src/main/java/com/example/firebasesdkproject/fragments/IssueDetailFragment.kt,e/5/e528931fae9974df96992cbe1580c0443d6f6fb8
+l
+<app/src/main/java/com/example/firebasesdkproject/core/App.kt,e/0/e0404f7fe2b0ea8ea9a9684aa48f4de13a9d6c0f
+u
+Eapp/src/main/java/com/example/firebasesdkproject/database/issueDAO.kt,2/0/2054508bd5b30237bcdfb69f8b9b937ca6bfb814
 w
-Gapp/src/main/java/com/example/firebasesdkproject/model/MockDataClass.kt,8/7/879dfcae69f1e1edfa30e9bcbd32814962e14c07
+Gapp/src/main/java/com/example/firebasesdkproject/Retrofit/ApiService.kt,6/a/6ae7f36af08a8297c942ce8aaf33b5fc6f935df6
+v
+Fapp/src/main/java/com/example/firebasesdkproject/model/CommentModel.kt,e/8/e81b0d75ff3c4694b8bdf688ee02b9288533a2bc
+
+Oapp/src/main/java/com/example/firebasesdkproject/model/CommentListRepository.kt,b/0/b0c7f3d0d6b03df5a325696f5c92e0122f9f72fb
+s
+Capp/src/main/java/com/example/firebasesdkproject/database/RoomDb.kt,d/1/d11710ab1e56098eb1c435a45e5a7323716415b8
+ƒ
+Sapp/src/main/java/com/example/firebasesdkproject/viewmodel/IssueListingViewModel.kt,6/9/69f84e8a81af2fe5f72986adc1e3fc6061bfb9f3

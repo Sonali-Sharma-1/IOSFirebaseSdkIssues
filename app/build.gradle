@@ -18,7 +18,7 @@ android {
         applicationId "com.example.firebasesdkproject"
         minSdkVersion 15
         targetSdkVersion 29
-        multiDexEnabled true
+        multiDexEnabled false
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,6 +32,14 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -54,8 +62,9 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:1.1.1"
     kapt "android.arch.persistence.room:compiler:1.1.1"
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
-    implementation 'com.android.support:multidex:1.0.3'
     compile 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
 
 
 }

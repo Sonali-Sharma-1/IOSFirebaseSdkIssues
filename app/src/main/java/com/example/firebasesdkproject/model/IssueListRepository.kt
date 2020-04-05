@@ -1,6 +1,7 @@
 package com.example.firebasesdkproject.model
 
 import android.content.ContentValues.TAG
+import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.firebasesdkproject.Retrofit.RetrofitClient
@@ -8,7 +9,6 @@ import com.example.firebasesdkproject.database.RoomDb
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 
 class IssueListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
@@ -22,11 +22,13 @@ class IssueListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
 
         val call = service.getIssueList()
 
-        call!!.enqueue(object : Callback<IssueModel> {
+        call.enqueue(object : Callback<IssueModel> {
             override fun onResponse(call: Call<IssueModel>, response: Response<IssueModel>) {
                 list = response.body()!!
                 mutableLiveData.value = response.body()
-                saveInDB(response.body())
+                AsyncTask.execute {
+                    saveInDB(response.body())
+                }
             }
 
             override fun onFailure(call: Call<IssueModel>, t: Throwable) {}

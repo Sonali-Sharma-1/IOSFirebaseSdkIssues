@@ -1,6 +1,7 @@
 package com.example.firebasesdkproject.model
 
 import android.content.ContentValues
+import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.firebasesdkproject.Retrofit.RetrofitClient
@@ -28,7 +29,9 @@ class CommentListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
             override fun onResponse(call: Call<CommentModel?>, response: Response<CommentModel?>) {
                 commentList = response.body()!!
                 mutableLiveData.value = response.body()
-                saveInDB(response.body())
+                AsyncTask.execute {
+                    saveInDB(response.body())
+                }
             }
 
             override fun onFailure(call: Call<CommentModel?>, t: Throwable) {}
