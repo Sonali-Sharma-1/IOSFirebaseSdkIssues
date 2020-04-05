@@ -41,7 +41,9 @@ class IssueDetailFragment : Fragment {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         progress_bar.visibility = VISIBLE
-        val factory = arguments?.getString(COMMENTS_URL)?.let { DetailListingViewModel.Factory(it) }
+        val factory = arguments?.getString(COMMENTS_URL)?.let {
+            DetailListingViewModel.Factory(it, arguments?.getInt(ISSUE_ID_KEY))
+        }
         detailListViewModel =
             ViewModelProviders.of(this, factory).get(DetailListingViewModel::class.java)
         detailListViewModel!!.getCommentList.observe(this, Observer { list ->

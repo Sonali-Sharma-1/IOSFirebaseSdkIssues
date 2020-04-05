@@ -11,7 +11,7 @@ public interface ApiService {
     @GET("issues")
     fun getIssueList(): Call<IssueModel>
 
-    @GET()
+    @GET
     fun getCommentList(@Url url: String?): Call<CommentModel?>?
 
 }
