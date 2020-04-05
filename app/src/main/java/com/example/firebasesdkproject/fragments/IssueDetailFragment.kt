@@ -3,6 +3,8 @@ package com.example.firebasesdkproject.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +15,7 @@ import com.example.firebasesdkproject.R
 import com.example.firebasesdkproject.adapter.IssueDetailAdapter
 import com.example.firebasesdkproject.model.CommentModelItem
 import com.example.firebasesdkproject.viewmodel.DetailListingViewModel
+import kotlinx.android.synthetic.main.fragment_detail_issue.*
 
 class IssueDetailFragment : Fragment {
     private lateinit var detailListAdapter: IssueDetailAdapter
@@ -37,11 +40,20 @@ class IssueDetailFragment : Fragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        progress_bar.visibility = VISIBLE
         val factory = arguments?.getString(COMMENTS_URL)?.let { DetailListingViewModel.Factory(it) }
         detailListViewModel =
             ViewModelProviders.of(this, factory).get(DetailListingViewModel::class.java)
         detailListViewModel!!.getCommentList.observe(this, Observer { list ->
-            detailListAdapter.setCommentList(list as List<CommentModelItem?>?)
+            progress_bar.visibility = GONE
+            detail_list_recycler_view.visibility = VISIBLE
+            if(list.size > 0) {
+                detailListAdapter.setCommentList(list as List<CommentModelItem?>?)
+            }else{
+                progress_bar.visibility = GONE
+                detail_list_recycler_view.visibility = GONE
+                no_data_found_layout.visibility = VISIBLE
+            }
         })
     }
 

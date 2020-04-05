@@ -14,7 +14,7 @@ abstract class RoomDb : RoomDatabase() {
 
     companion object {
         const val DB_NAME = "issues.db"
-        const val VERSION = 3
+        const val VERSION = 7
         private val instance: RoomDb by lazy { create(App.instance) }
 
         @Synchronized
