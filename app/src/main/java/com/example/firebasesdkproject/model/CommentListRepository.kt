@@ -24,14 +24,15 @@ class CommentListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
     fun getCommentLiveData(): MutableLiveData<CommentModel> {
         val service = RetrofitClient.service
         val call = service.getCommentList(url)
-        var item : CommentModelItem ?= null
-        item?.issueId = id
         call?.enqueue(object : Callback<CommentModel?> {
 
             override fun onResponse(call: Call<CommentModel?>, response: Response<CommentModel?>) {
                     commentList = response.body()!!
                     mutableLiveData.value = response.body()
                     AsyncTask.execute {
+                        for(i in commentList as MutableList<CommentModelItem>){
+                            i.issueId = id
+                        }
                         saveInDB(response.body())
                     }
             }

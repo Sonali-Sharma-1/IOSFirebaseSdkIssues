@@ -1,6 +1,7 @@
 package com.example.firebasesdkproject.database
 
 import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -14,7 +15,7 @@ abstract class RoomDb : RoomDatabase() {
 
     companion object {
         const val DB_NAME = "issues.db"
-        const val VERSION = 8
+        const val VERSION = 11
         private val instance: RoomDb by lazy { create(App.instance) }
 
         @Synchronized
