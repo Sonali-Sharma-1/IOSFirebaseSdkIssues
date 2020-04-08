@@ -12,6 +12,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,7 +70,7 @@ class IssueDetailFragment : Fragment {
                 }
             })
         } else {
-            var list: List<CommentModelItem>? = fetchCommentsFromDb()
+            var list: LiveData<List<CommentModelItem>>? = fetchCommentsFromDb()
             if (list != null) {
                 progress_bar.visibility = GONE
                 detail_list_recycler_view.visibility = VISIBLE
@@ -118,8 +119,8 @@ class IssueDetailFragment : Fragment {
         }
     }
 
-    fun fetchCommentsFromDb(): List<CommentModelItem>? {
-        var list: List<CommentModelItem>? = null
+    fun fetchCommentsFromDb(): LiveData<List<CommentModelItem>>? {
+        var list: LiveData<List<CommentModelItem>>? = null
         try {
             AsyncTask.execute {
                 list = roomDb.issueDao().getCommentListing()

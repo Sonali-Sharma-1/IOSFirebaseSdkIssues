@@ -9,13 +9,13 @@ import com.example.firebasesdkproject.core.App
 import com.example.firebasesdkproject.model.CommentModelItem
 import com.example.firebasesdkproject.model.IssueModelItem
 
-@Database(entities = [IssueModelItem::class, CommentModelItem::class], version = RoomDb.VERSION)
+@Database(entities = [IssueModelItem::class, CommentModelItem::class], version = RoomDb.VERSION,exportSchema = false)
 abstract class RoomDb : RoomDatabase() {
     abstract fun issueDao(): issueDAO
 
     companion object {
         const val DB_NAME = "issues.db"
-        const val VERSION = 11
+        const val VERSION = 12
         private val instance: RoomDb by lazy { create(App.instance) }
 
         @Synchronized

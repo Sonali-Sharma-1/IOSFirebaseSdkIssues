@@ -30,9 +30,9 @@ class CommentListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
                     commentList = response.body()!!
                     mutableLiveData.value = response.body()
                     AsyncTask.execute {
-                        for(i in commentList as MutableList<CommentModelItem>){
-                            i.issueId = id
-                        }
+//                        for(i in commentList as MutableList<CommentModelItem>){
+//                            i.issueId = id
+//                        }
                         saveInDB(response.body())
                     }
             }

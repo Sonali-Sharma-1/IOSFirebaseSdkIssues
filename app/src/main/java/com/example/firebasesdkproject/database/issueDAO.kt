@@ -1,5 +1,6 @@
 package com.example.firebasesdkproject.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.firebasesdkproject.model.CommentModel
 import com.example.firebasesdkproject.model.CommentModelItem
@@ -19,8 +20,8 @@ interface issueDAO {
     fun deleteIssueList(list: IssueModel)
 
     @Query("SELECT * FROM IssueModelItem")
-    fun getAllIssuesListing(): List<IssueModelItem>
+    fun getAllIssuesListing(): LiveData<List<IssueModelItem>>?
 
     @Query("SELECT * FROM CommentModelItem")
-    fun getCommentListing(): List<CommentModelItem>
+    fun getCommentListing(): LiveData<List<CommentModelItem>>?
 }

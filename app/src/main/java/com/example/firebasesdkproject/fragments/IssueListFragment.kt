@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,7 +62,7 @@ class IssueListFragment : Fragment {
                 issueListAdapter.setIssueList(list as List<IssueModelItem?>?)
             })
         } else {
-            var list: List<IssueModelItem>?  = fetchIssueListingFromDb()
+            var list: LiveData<List<IssueModelItem>>?  = fetchIssueListingFromDb()
             issueListAdapter.setIssueList(list as List<IssueModelItem?>?)
         }
     }
@@ -85,8 +86,8 @@ class IssueListFragment : Fragment {
         }
     }
 
-    fun fetchIssueListingFromDb(): List<IssueModelItem>? {
-        var list: List<IssueModelItem> ?= null
+    fun fetchIssueListingFromDb(): LiveData<List<IssueModelItem>>? {
+        var list: LiveData<List<IssueModelItem>>? ?= null
         try {
             AsyncTask.execute {
                 list = roomDb.issueDao().getAllIssuesListing()
