@@ -6,12 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.firebasesdkproject.model.CommentListRepository
-import com.example.firebasesdkproject.model.CommentModel
+import com.example.firebasesdkproject.model.CommentModelItem
 
 class DetailListingViewModel(commentURL: String?, id : Int?)  : ViewModel(){
     private var commentListRepository: CommentListRepository? = null
 
-    val getCommentList: LiveData<CommentModel>
+    val getCommentList: LiveData<List<CommentModelItem>>
         get() = commentListRepository!!.getCommentLiveData()
 
     init {

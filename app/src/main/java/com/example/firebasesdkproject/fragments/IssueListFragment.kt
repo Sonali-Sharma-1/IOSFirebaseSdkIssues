@@ -19,6 +19,7 @@ import com.example.firebasesdkproject.ItemClickListener
 import com.example.firebasesdkproject.MainActivity
 import com.example.firebasesdkproject.R
 import com.example.firebasesdkproject.adapter.IssueListAdapter
+import com.example.firebasesdkproject.core.App
 import com.example.firebasesdkproject.database.RoomDb
 import com.example.firebasesdkproject.model.IssueModelItem
 import com.example.firebasesdkproject.viewmodel.IssueListingViewModel
@@ -28,7 +29,8 @@ import java.lang.Exception
 class IssueListFragment : Fragment {
     private lateinit var issueListAdapter: IssueListAdapter
     private var issueListingViewModel: IssueListingViewModel? = null
-    val roomDb: RoomDb = RoomDb.getInstance()
+    val roomDb: RoomDb? = App.instance.applicationContext?.let { RoomDb.getInstance(it) }
+    var fragCreated: Boolean = false
 
     constructor() {}
 
@@ -55,14 +57,19 @@ class IssueListFragment : Fragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (isNetworkAvailable()) {
-            issueListingViewModel =
-                ViewModelProviders.of(this).get(IssueListingViewModel::class.java)
-            issueListingViewModel!!.getAllList.observe(this, Observer { list ->
+        if (!fragCreated) {
+            if (isNetworkAvailable()) {
+                issueListingViewModel =
+                    ViewModelProviders.of(this).get(IssueListingViewModel::class.java)
+                issueListingViewModel!!.getAllList.observe(this, Observer { list ->
+                    issueListAdapter.setIssueList(list as List<IssueModelItem?>?)
+                })
+            }else {
+                var list: List<IssueModelItem>? = fetchIssueListingFromDb()
                 issueListAdapter.setIssueList(list as List<IssueModelItem?>?)
-            })
+            }
         } else {
-            var list: LiveData<List<IssueModelItem>>?  = fetchIssueListingFromDb()
+            var list: List<IssueModelItem>? = fetchIssueListingFromDb()
             issueListAdapter.setIssueList(list as List<IssueModelItem?>?)
         }
     }
@@ -86,12 +93,10 @@ class IssueListFragment : Fragment {
         }
     }
 
-    fun fetchIssueListingFromDb(): LiveData<List<IssueModelItem>>? {
-        var list: LiveData<List<IssueModelItem>>? ?= null
+    fun fetchIssueListingFromDb(): List<IssueModelItem>? {
+        var list: List<IssueModelItem>? = null
         try {
-            AsyncTask.execute {
-                list = roomDb.issueDao().getAllIssuesListing()
-            }
+                list = roomDb?.issueDao()?.getAllIssuesListing()
         } catch (e: Exception) {
             e.printStackTrace()
         }

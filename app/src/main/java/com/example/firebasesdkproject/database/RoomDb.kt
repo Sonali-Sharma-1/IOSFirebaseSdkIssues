@@ -1,32 +1,33 @@
 package com.example.firebasesdkproject.database
 
 import android.content.Context
-import androidx.fragment.app.FragmentActivity
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.firebasesdkproject.core.App
-import com.example.firebasesdkproject.model.CommentModelItem
+import androidx.room.TypeConverters
 import com.example.firebasesdkproject.model.IssueModelItem
+import com.example.firebasesdkproject.typeConverter.CommentTypeConvertor
 
-@Database(entities = [IssueModelItem::class, CommentModelItem::class], version = RoomDb.VERSION,exportSchema = false)
+@Database(entities = [IssueModelItem::class], version = RoomDb.VERSION,exportSchema = false)
+@TypeConverters(CommentTypeConvertor::class)
 abstract class RoomDb : RoomDatabase() {
-    abstract fun issueDao(): issueDAO
 
+    @SuppressWarnings("WeakerAccess")
+    abstract fun issueDao(): IssueDAO
     companion object {
+        private var dbInstance: RoomDb ?= null
         const val DB_NAME = "issues.db"
-        const val VERSION = 12
-        private val instance: RoomDb by lazy { create(App.instance) }
+        const val VERSION = 13
 
         @Synchronized
-        internal fun getInstance(): RoomDb {
-            return instance
-        }
-
-        private fun create(context: Context): RoomDb {
-            return Room.databaseBuilder(context, RoomDb::class.java, DB_NAME)
-                .fallbackToDestructiveMigration()
-                .build()
+        internal fun getInstance(context: Context): RoomDb {
+            if(dbInstance == null){
+                dbInstance = Room
+                    .databaseBuilder(context.applicationContext, RoomDb::class.java, DB_NAME).allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build()
+            }
+            return dbInstance as RoomDb
         }
     }
 

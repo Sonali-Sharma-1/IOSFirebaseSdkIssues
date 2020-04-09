@@ -7,7 +7,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="commentModel"
+            name="comment"
             type="com.example.firebasesdkproject.model.CommentModelItem" />
     </data>
 
@@ -50,7 +50,7 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:textAllCaps="true"
-                android:text="@{commentModel.user.login}" />
+                android:text="@{comment.user.login}" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,7 +73,7 @@
             android:id="@+id/comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{commentModel.body}"
+            android:text="@{comment.body}"
             app:layoutManager="LinearLayoutManager" />
         </LinearLayout>
     </LinearLayout>

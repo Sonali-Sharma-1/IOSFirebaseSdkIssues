@@ -5,13 +5,14 @@ import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.firebasesdkproject.Retrofit.RetrofitClient
+import com.example.firebasesdkproject.core.App
 import com.example.firebasesdkproject.database.RoomDb
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class IssueListRepository(val roomDb: RoomDb = RoomDb.getInstance()) {
+class IssueListRepository(val roomDb: RoomDb = RoomDb.getInstance(App.instance.applicationContext)) {
     private var list: IssueModel? = null
     private val mutableLiveData = MutableLiveData<IssueModel>()
 

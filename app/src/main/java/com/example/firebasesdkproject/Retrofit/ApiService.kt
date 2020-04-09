@@ -1,6 +1,6 @@
 package com.example.firebasesdkproject.Retrofit
 
-import com.example.firebasesdkproject.model.CommentModel
+import com.example.firebasesdkproject.model.CommentModelItem
 import com.example.firebasesdkproject.model.IssueModel
 import retrofit2.Call
 import retrofit2.http.GET
@@ -12,6 +12,6 @@ public interface ApiService {
     fun getIssueList(): Call<IssueModel>
 
     @GET
-    fun getCommentList(@Url url: String?): Call<CommentModel?>?
+    fun getCommentList(@Url url: String?): Call<List<CommentModelItem>>
 
 }

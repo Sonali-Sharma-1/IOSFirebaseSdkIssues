@@ -6,9 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firebasesdkproject.R
 import com.example.firebasesdkproject.databinding.CommentIssueListBinding
-import com.example.firebasesdkproject.databinding.IssueListItemBinding
 import com.example.firebasesdkproject.model.CommentModelItem
-import com.example.firebasesdkproject.model.IssueModelItem
 
 class IssueDetailAdapter : RecyclerView.Adapter<IssueDetailAdapter.DetailViewHolder>() {
     private var commentList: List<CommentModelItem?>? = null
@@ -20,7 +18,7 @@ class IssueDetailAdapter : RecyclerView.Adapter<IssueDetailAdapter.DetailViewHol
 
     override fun onBindViewHolder(holder: IssueDetailAdapter.DetailViewHolder, position: Int) {
         val currentList = commentList!![position]
-        holder.binding.setCommentModel(currentList)
+        holder.binding.comment = currentList
         holder.binding.executePendingBindings()
     }
 

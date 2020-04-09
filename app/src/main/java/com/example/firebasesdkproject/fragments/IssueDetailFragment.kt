@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firebasesdkproject.R
 import com.example.firebasesdkproject.adapter.IssueDetailAdapter
+import com.example.firebasesdkproject.core.App
 import com.example.firebasesdkproject.database.RoomDb
 import com.example.firebasesdkproject.model.CommentModelItem
 import com.example.firebasesdkproject.model.IssueModelItem
@@ -29,7 +30,7 @@ import java.lang.Exception
 class IssueDetailFragment : Fragment {
     private lateinit var detailListAdapter: IssueDetailAdapter
     private var detailListViewModel: DetailListingViewModel? = null
-    val roomDb: RoomDb = RoomDb.getInstance()
+    val roomDb: RoomDb? = App.instance.applicationContext?.let { RoomDb.getInstance(it) }
 
     constructor() {}
 
@@ -60,27 +61,31 @@ class IssueDetailFragment : Fragment {
                 ViewModelProviders.of(this, factory).get(DetailListingViewModel::class.java)
             detailListViewModel!!.getCommentList.observe(this, Observer { list ->
                 if (list.size > 0) {
-                    progress_bar.visibility = GONE
-                    detail_list_recycler_view.visibility = VISIBLE
-                    detailListAdapter.setCommentList(list as List<CommentModelItem?>?)
+                    updateView(list)
                 } else {
-                    progress_bar.visibility = GONE
-                    detail_list_recycler_view.visibility = GONE
-                    no_data_found_layout.visibility = VISIBLE
+                    showNoView()
                 }
             })
         } else {
-            var list: LiveData<List<CommentModelItem>>? = fetchCommentsFromDb()
+            var list: List<CommentModelItem>? = fetchCommentsFromDb()
             if (list != null) {
-                progress_bar.visibility = GONE
-                detail_list_recycler_view.visibility = VISIBLE
-                detailListAdapter.setCommentList(list as List<CommentModelItem?>?)
+               updateView(list)
             } else {
-                progress_bar.visibility = GONE
-                detail_list_recycler_view.visibility = GONE
-                no_data_found_layout.visibility = VISIBLE
+               showNoView()
             }
         }
+    }
+
+    fun updateView(list : List<CommentModelItem>){
+        progress_bar.visibility = GONE
+        detail_list_recycler_view.visibility = VISIBLE
+        detailListAdapter.setCommentList(list)
+    }
+
+    fun showNoView(){
+        progress_bar.visibility = GONE
+        detail_list_recycler_view.visibility = GONE
+        no_data_found_layout.visibility = VISIBLE
     }
 
     fun isNetworkAvailable(): Boolean {
@@ -119,12 +124,15 @@ class IssueDetailFragment : Fragment {
         }
     }
 
-    fun fetchCommentsFromDb(): LiveData<List<CommentModelItem>>? {
-        var list: LiveData<List<CommentModelItem>>? = null
+    fun fetchCommentsFromDb(): List<CommentModelItem>? {
+        var list: List<CommentModelItem>? = null
         try {
-            AsyncTask.execute {
-                list = roomDb.issueDao().getCommentListing()
+            val myList = arguments?.getInt(ISSUE_ID_KEY)?.let {
+                roomDb?.issueDao()?.getCommentsForIssueId(
+                    it
+                )
             }
+            list = myList?.get(0)?.commentsList
         } catch (e: Exception) {
             e.printStackTrace()
         }
